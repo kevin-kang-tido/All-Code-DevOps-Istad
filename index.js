@@ -33,6 +33,7 @@ let card = `
 
 let images1 = [
     "./img/imgtesting.jpg",
+    
     "./img/img2.jpg",
     "./img/product_2.jpg",
     "./img/product_3.jpg",
