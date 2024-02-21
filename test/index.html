@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- create an section to render card from script -->
+    <section class="container mx-auto grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-4">
+    </section>
+   <script>
+  fetch('./products.json')
+  .then(response => response.json())
+    // .then(response => console.log(response[0].images))
+  .then(data => {
+    const productCardsContainer = document.querySelector('section');
+    data.map(product => {
+      const card = document.createElement('div');
+      card.classList.add('bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow', 'overflow-hidden', 'dark:bg-gray-800', 'dark:border-gray-700');
+      card.innerHTML = `
+        <img class="w-full h-48 object-cover" src="${product.images[0]??Null}" alt="${product.title}">
+        <div class="p-5">
+          <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">${product.title}</h5>
+          <p class="mb-3 text-gray-700 dark:text-gray-400">${product.description}</p>
+          <p class="mb-3 font-semibold text-gray-900 dark:text-white">$${product.price}</p> 
+          <button class="inline-block px-4 py-2 text-sm font-medium leading-5 text-white uppercase transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:shadow-outline-blue dark:active:bg-blue-600">Add to Cart</button>
+        </div>
+      `;
+      productCardsContainer.appendChild(card);
+    });
+  })          
+  .catch(error => console.error('Error fetching products:', error));
+   </script>
+</body>
+</html>
